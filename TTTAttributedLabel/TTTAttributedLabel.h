@@ -23,44 +23,54 @@
 #import <UIKit/UIKit.h>
 #import <CoreText/CoreText.h>
 
+#ifdef TTTATTRIBUTEDLABEL_PREFIX
+#	define _TTTATTRIBUTEDLABEL_CONCAT2(c, d) c ## d
+#	define _TTTATTRIBUTEDLABEL_CONCAT(a, b) _TTTATTRIBUTEDLABEL_CONCAT2(a, b)
+#	define TTTATTRIBUTEDLABEL_PREPEND(x) _TTTATTRIBUTEDLABEL_CONCAT(TTTATTRIBUTEDLABEL_PREFIX, x)
+#	define _TTTATTRIBUTEDLABEL_STRINGIFY2(x) #x
+#	define TTTATTRIBUTEDLABEL_STRINGIFY(x) _TTTATTRIBUTEDLABEL_STRINGIFY2(x)
+#else
+#	define TTTATTRIBUTEDLABEL_PREPEND(x) x
+#endif
+
 /**
  Vertical alignment for text in a label whose bounds are larger than its text bounds
  */
 typedef enum {
-    TTTAttributedLabelVerticalAlignmentCenter   = 0,
-    TTTAttributedLabelVerticalAlignmentTop      = 1,
-    TTTAttributedLabelVerticalAlignmentBottom   = 2,
-} TTTAttributedLabelVerticalAlignment;
+    TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabelVerticalAlignmentCenter)   = 0,
+    TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabelVerticalAlignmentTop)      = 1,
+    TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabelVerticalAlignmentBottom)   = 2,
+} TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabelVerticalAlignment);
 
 /**
  Determines whether the text to which this attribute applies has a strikeout drawn through itself.
  */
-extern NSString * const kTTTStrikeOutAttributeName;
+extern NSString * const TTTATTRIBUTEDLABEL_PREPEND(kTTTStrikeOutAttributeName);
 
 /**
  The background fill color. Value must be a `CGColorRef`. Default value is `nil` (no fill).
  */
-extern NSString * const kTTTBackgroundFillColorAttributeName;
+extern NSString * const TTTATTRIBUTEDLABEL_PREPEND(kTTTBackgroundFillColorAttributeName);
 
 /**
  The background stroke color. Value must be a `CGColorRef`. Default value is `nil` (no stroke).
  */
-extern NSString * const kTTTBackgroundStrokeColorAttributeName;
+extern NSString * const TTTATTRIBUTEDLABEL_PREPEND(kTTTBackgroundStrokeColorAttributeName);
 
 /**
  The background stroke line width. Value must be an `NSNumber`. Default value is `1.0f`.
  */
-extern NSString * const kTTTBackgroundLineWidthAttributeName;
+extern NSString * const TTTATTRIBUTEDLABEL_PREPEND(kTTTBackgroundLineWidthAttributeName);
 
 /**
  The background corner radius. Value must be an `NSNumber`. Default value is `5.0f`.
  */
-extern NSString * const kTTTBackgroundCornerRadiusAttributeName;
+extern NSString * const TTTATTRIBUTEDLABEL_PREPEND(kTTTBackgroundCornerRadiusAttributeName);
 
-@protocol TTTAttributedLabelDelegate;
+@protocol TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabelDelegate);
 
 // Override UILabel @property to accept both NSString and NSAttributedString
-@protocol TTTAttributedLabel <NSObject>
+@protocol TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabel) <NSObject>
 @property (nonatomic, copy) id text;
 @end
 
@@ -83,7 +93,7 @@ extern NSString * const kTTTBackgroundCornerRadiusAttributeName;
  
  @warning Any properties changed on the label after setting the text will not be reflected until a subsequent call to `setText:` or `setText:afterInheritingLabelAttributesAndConfiguringWithBlock:`. This is to say, order of operations matters in this case. For example, if the label text color is originally black when the text is set, changing the text color to red will have no effect on the display of the label until the text is set once again.
  */
-@interface TTTAttributedLabel : UILabel <TTTAttributedLabel, UIGestureRecognizerDelegate>
+@interface TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabel) : UILabel <TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabel), UIGestureRecognizerDelegate>
 
 ///-----------------------------
 /// @name Accessing the Delegate
@@ -94,7 +104,7 @@ extern NSString * const kTTTBackgroundCornerRadiusAttributeName;
  
  @discussion A `TTTAttributedLabel` delegate responds to messages sent by tapping on links in the label. You can use the delegate to respond to links referencing a URL, address, phone number, date, or date with a specified time zone and duration.
  */
-@property (nonatomic, unsafe_unretained) IBOutlet id <TTTAttributedLabelDelegate> delegate;
+@property (nonatomic, unsafe_unretained) IBOutlet id <TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabelDelegate)> delegate;
 
 ///--------------------------------------------
 /// @name Detecting, Accessing, & Styling Links
@@ -183,7 +193,7 @@ extern NSString * const kTTTBackgroundCornerRadiusAttributeName;
 /**
  The vertical text alignment for the label, for when the frame size is greater than the text rect size. The vertical alignment is `TTTAttributedLabelVerticalAlignmentCenter` by default.
  */
-@property (nonatomic, assign) TTTAttributedLabelVerticalAlignment verticalAlignment;
+@property (nonatomic, assign) TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabelVerticalAlignment) verticalAlignment;
 
 /**
  The truncation token that appears at the end of the truncated line. `nil` by default.
@@ -301,7 +311,7 @@ afterInheritingLabelAttributesAndConfiguringWithBlock:(NSMutableAttributedString
 /**
  The `TTTAttributedLabelDelegate` protocol defines the messages sent to an attributed label delegate when links are tapped. All of the methods of this protocol are optional.
  */
-@protocol TTTAttributedLabelDelegate <NSObject>
+@protocol TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabelDelegate) <NSObject>
 
 ///-----------------------------------
 /// @name Responding to Link Selection
@@ -314,7 +324,7 @@ afterInheritingLabelAttributesAndConfiguringWithBlock:(NSMutableAttributedString
  @param label The label whose link was selected.
  @param url The URL for the selected link.
  */
-- (void)attributedLabel:(TTTAttributedLabel *)label
+- (void)attributedLabel:(TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabel) *)label
    didSelectLinkWithURL:(NSURL *)url;
 
 /**
@@ -323,7 +333,7 @@ afterInheritingLabelAttributesAndConfiguringWithBlock:(NSMutableAttributedString
  @param label The label whose link was selected.
  @param addressComponents The components of the address for the selected link.
  */
-- (void)attributedLabel:(TTTAttributedLabel *)label
+- (void)attributedLabel:(TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabel) *)label
 didSelectLinkWithAddress:(NSDictionary *)addressComponents;
 
 /**
@@ -332,7 +342,7 @@ didSelectLinkWithAddress:(NSDictionary *)addressComponents;
  @param label The label whose link was selected.
  @param phoneNumber The phone number for the selected link.
  */
-- (void)attributedLabel:(TTTAttributedLabel *)label
+- (void)attributedLabel:(TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabel) *)label
 didSelectLinkWithPhoneNumber:(NSString *)phoneNumber;
 
 /**
@@ -341,7 +351,7 @@ didSelectLinkWithPhoneNumber:(NSString *)phoneNumber;
  @param label The label whose link was selected.
  @param date The datefor the selected link.
  */
-- (void)attributedLabel:(TTTAttributedLabel *)label
+- (void)attributedLabel:(TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabel) *)label
   didSelectLinkWithDate:(NSDate *)date;
 
 /**
@@ -352,7 +362,7 @@ didSelectLinkWithPhoneNumber:(NSString *)phoneNumber;
  @param timeZone The time zone of the date for the selected link.
  @param duration The duration, in seconds from the date for the selected link.
  */
-- (void)attributedLabel:(TTTAttributedLabel *)label
+- (void)attributedLabel:(TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabel) *)label
   didSelectLinkWithDate:(NSDate *)date
                timeZone:(NSTimeZone *)timeZone
                duration:(NSTimeInterval)duration;
@@ -365,7 +375,7 @@ didSelectLinkWithPhoneNumber:(NSString *)phoneNumber;
  @param label The label whose link was selected.
  @param result The custom text checking result.
  */
-- (void)attributedLabel:(TTTAttributedLabel *)label
+- (void)attributedLabel:(TTTATTRIBUTEDLABEL_PREPEND(TTTAttributedLabel) *)label
 didSelectLinkWithTextCheckingResult:(NSTextCheckingResult *)result;
 
 @end

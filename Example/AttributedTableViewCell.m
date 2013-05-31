@@ -63,7 +63,7 @@ static inline NSRegularExpression * ParenthesisRegularExpression() {
     self.layer.shouldRasterize = YES;
     self.layer.rasterizationScale = [[UIScreen mainScreen] scale];
     
-    self.summaryLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    self.summaryLabel = [[EXAMPLE_TTTAttributedLabel alloc] initWithFrame:CGRectZero];
     self.summaryLabel.font = [UIFont systemFontOfSize:kEspressoDescriptionTextFontSize];
     self.summaryLabel.textColor = [UIColor darkGrayColor];
     self.summaryLabel.lineBreakMode = UILineBreakModeWordWrap;
@@ -73,10 +73,10 @@ static inline NSRegularExpression * ParenthesisRegularExpression() {
     NSMutableDictionary *mutableActiveLinkAttributes = [NSMutableDictionary dictionary];
     [mutableActiveLinkAttributes setValue:[NSNumber numberWithBool:NO] forKey:(NSString *)kCTUnderlineStyleAttributeName];
     [mutableActiveLinkAttributes setValue:(__bridge id)[[UIColor redColor] CGColor] forKey:(NSString *)kCTForegroundColorAttributeName];
-    [mutableActiveLinkAttributes setValue:(__bridge id)[[UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.1f] CGColor] forKey:(NSString *)kTTTBackgroundFillColorAttributeName];
-    [mutableActiveLinkAttributes setValue:(__bridge id)[[UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.25f] CGColor] forKey:(NSString *)kTTTBackgroundStrokeColorAttributeName];
-    [mutableActiveLinkAttributes setValue:[NSNumber numberWithFloat:1.0f] forKey:(NSString *)kTTTBackgroundLineWidthAttributeName];
-    [mutableActiveLinkAttributes setValue:[NSNumber numberWithFloat:5.0f] forKey:(NSString *)kTTTBackgroundCornerRadiusAttributeName];
+    [mutableActiveLinkAttributes setValue:(__bridge id)[[UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.1f] CGColor] forKey:(NSString *)EXAMPLE_kTTTBackgroundFillColorAttributeName];
+    [mutableActiveLinkAttributes setValue:(__bridge id)[[UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.25f] CGColor] forKey:(NSString *)EXAMPLE_kTTTBackgroundStrokeColorAttributeName];
+    [mutableActiveLinkAttributes setValue:[NSNumber numberWithFloat:1.0f] forKey:(NSString *)EXAMPLE_kTTTBackgroundLineWidthAttributeName];
+    [mutableActiveLinkAttributes setValue:[NSNumber numberWithFloat:5.0f] forKey:(NSString *)EXAMPLE_kTTTBackgroundCornerRadiusAttributeName];
     self.summaryLabel.activeLinkAttributes = mutableActiveLinkAttributes;
     
     self.summaryLabel.highlightedTextColor = [UIColor whiteColor];
@@ -85,7 +85,7 @@ static inline NSRegularExpression * ParenthesisRegularExpression() {
     self.summaryLabel.highlightedShadowColor = [UIColor colorWithWhite:0.0f alpha:0.25f];
     self.summaryLabel.highlightedShadowOffset = CGSizeMake(0.0f, -1.0f);
     self.summaryLabel.highlightedShadowRadius = 1;
-    self.summaryLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
+    self.summaryLabel.verticalAlignment = EXAMPLE_TTTAttributedLabelVerticalAlignmentTop;
 
     [self.contentView addSubview:self.summaryLabel];
     
