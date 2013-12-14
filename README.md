@@ -1,6 +1,6 @@
 # PrefixedTTTAttributedLabel
 
-TTTAttributedLabel is a fork of JSONKit which prefixes the symbols in TTTAttributedLabel for easy embedding in static libraries to avoid conflicts with other uses of TTTAttributedLabel in the same binary.
+PrefixedTTTAttributedLabel is a fork of TTTAttributedLabel which prefixes the symbols in TTTAttributedLabel for easy embedding in static libraries to avoid conflicts with other uses of TTTAttributedLabel in the same binary.
 
 To use, set a preprocessor macro for `TTTATTRIBUTEDLABEL_PREFIX`, for example: `TTTATTRIBUTEDLABEL_PREFIX=EXAMPLE_`. Now, all external TTTAttributedLabel symbols will be prefixed with "EXAMPLE_", so `TTTAttributedLabel` would become `EXAMPLE_TTTAttributedLabel`.
 
